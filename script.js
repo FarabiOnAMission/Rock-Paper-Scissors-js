@@ -58,4 +58,16 @@ function playRound(hooman_choice,pc_choice){
         const Computer_Choice = getComputerChoice();
         playRound(Human_Choice,Computer_Choice);
     }
+
+    if(HumanScore>ComputerScore){
+        console.log("You WIN!!!");
+    }
+    else if(ComputerScore>HumanScore){
+        console.log("YOU LOSE!!!");
+    }
+    else{
+        console.log("IT IS A DRAW!!");
+    }
 }
+
+playGame();
