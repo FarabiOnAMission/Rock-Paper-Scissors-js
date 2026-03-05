@@ -33,6 +33,13 @@ function declarewinner(){
 }
 
 let HumanScore = 0, ComputerScore=0;
+humanDisplay = document.getElementById("humanDisplay");
+computerDisplay = document.getElementById("computerDisplay");
+
+function updateScore(){
+    humanDisplay.textContent = `Human Score: ${HumanScore}`;
+    computerDisplay.textContent = `Computer Score: ${ComputerScore}`;
+}
 
 //Each Round logic
 function playRound(hooman_choice){
@@ -69,8 +76,13 @@ function playRound(hooman_choice){
         alert("NOBODY WINS!!!");
     }
 
+    updateScore();
+
     if(HumanScore==5 || ComputerScore==5){
         declarewinner();
+        HumanScore=0;
+        ComputerScore=0;
+        updateScore();
     }
 }
     function playGame(){
@@ -88,7 +100,9 @@ function playRound(hooman_choice){
     });
     scissorButton.addEventListener('click',()=>{
         playRound("scissors");
-    });    
+    });
+    
+    updateScore();
 }
 
 playGame();
