@@ -1,9 +1,11 @@
+//Randomized choice for computer
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
 const choice=["rock","paper","scissors"]
 
+//Computer Choice Function
 function getComputerChoice(){
     let pc_choice = getRandomInt(3);
     let pc_move = choice[pc_choice];
@@ -11,14 +13,30 @@ function getComputerChoice(){
     return pc_move;
 }
 
+//Human choice function
 function getHumanChoice(){
     let user_move = prompt("Enter a move: ");
     return user_move;
 }
 
+//Winner Conditions
+function declarewinner(){
+    if(HumanScore>ComputerScore){
+        alert("You WIN!!!");
+    }
+    else if(ComputerScore>HumanScore){
+        alert("YOU LOSE!!!");
+    }
+    else{
+        alert("IT IS A DRAW!!");
+    }
+}
+
 let HumanScore = 0, ComputerScore=0;
 
-function playRound(hooman_choice,pc_choice){
+//Each Round logic
+function playRound(hooman_choice){
+    pc_choice = getComputerChoice();
     hooman_choice = hooman_choice.toLowerCase();
     let hooman_win=false;
     let pc_win=false;
@@ -41,33 +59,36 @@ function playRound(hooman_choice,pc_choice){
 
     if(hooman_win){
         HumanScore++;
-        console.log(`You WIN!!! You chose ${hooman_choice} & Computer chose ${pc_choice}`);
+        alert(`You WIN!!! You chose ${hooman_choice} & Computer chose ${pc_choice}`);
     }
     else if(pc_win){
         ComputerScore++;
-        console.log(`You LOSE!!! You chose ${hooman_choice} & Computer chose ${pc_choice}`);
+        alert(`You LOSE!!! You chose ${hooman_choice} & Computer chose ${pc_choice}`);
     }
     else{
-        console.log("NOBODY WINS!!!");
+        alert("NOBODY WINS!!!");
+    }
+
+    if(HumanScore==5 || ComputerScore==5){
+        declarewinner();
     }
 }
     function playGame(){
         
-        for(let i=0;i<5;i++){
-        const Human_Choice = getHumanChoice();
-        const Computer_Choice = getComputerChoice();
-        playRound(Human_Choice,Computer_Choice);
-    }
+    const rockButton = document.getElementById("rockbtn");
+    const paperButton = document.getElementById("paperbtn");
+    const scissorButton = document.getElementById("scissorbtn");  
+    
 
-    if(HumanScore>ComputerScore){
-        console.log("You WIN!!!");
-    }
-    else if(ComputerScore>HumanScore){
-        console.log("YOU LOSE!!!");
-    }
-    else{
-        console.log("IT IS A DRAW!!");
-    }
+    rockButton.addEventListener('click',() =>{
+        playRound("rock");
+    });
+    paperButton.addEventListener('click',() =>{
+        playRound("paper");
+    });
+    scissorButton.addEventListener('click',()=>{
+        playRound("scissors");
+    });    
 }
 
 playGame();
